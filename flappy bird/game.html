@@ -39,6 +39,8 @@
         let yPipaAtas = 0;
         let yPipaBawah = tinggiPipaAtas + batasAman;
 
+        let lewatPipa = false;
+
         window.addEventListener("keydown", function(event){
             if(event.keyCode == 32){
                 g = g - 15;
@@ -72,7 +74,6 @@
             if(yBird >= canvas.height){
                 alert("Game over");
                 reset();
-                resetScore();
             }
             
             if(yBird < 0){
@@ -97,10 +98,10 @@
             if (xBird + wBird >= xPipa && xBird <= xPipa + lebarPipa && (yBird + 10 <= tinggiPipaAtas || yBird + (hBird - 20) >= yPipaBawah)){
                 alert("game over");
                 reset();
-                resetScore();
-            }else {
-                score += 1;
-                console.log(score);
+            }else if(xBird > xPipa + lebarPipa - 5 && !lewatPipa){
+                score ++;
+                console.log("Skor: " + score);
+                lewatPipa = true; 
             }
 
             
@@ -113,15 +114,9 @@
             wBird = 50;
             hBird = 50;
             xPipa = canvas.width + lebarPipa;
-        }
-
-        function resetScore(){
             score = 0;
+            lewatPipa = false;
         }
-
-        
-
-
     </script>
 </body>
 </html>
